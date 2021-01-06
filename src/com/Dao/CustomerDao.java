@@ -19,7 +19,7 @@ public class CustomerDao {
 			stmt.setString(3, customer.getLoginPass());
 			stmt.setInt(4, customer.acc.getTransictionPassword());
 			stmt.executeUpdate();
-			System.out.println("inserted records.");
+			System.out.println("inserted records");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -31,13 +31,6 @@ public class CustomerDao {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			if(con!=null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			
 		}
 	}
 	public Customer checkLogin(String uname,String pass) {
@@ -71,14 +64,56 @@ public class CustomerDao {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-//			if(con!=null)
-//				try {
-//					con.close();
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
 		}
 		return customer;
 		
+	}
+	public void changeBalance(float balance,int ID) {
+		Connection con=DBconnection.getCon();
+		PreparedStatement stmt=null;
+		try {
+			stmt=con.prepareStatement("update customer set balance=? "+ "where id=?");
+			stmt.setFloat(1, balance);
+			stmt.setInt(2, ID);
+			stmt.executeUpdate();
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+	}
+	
+	public float getBalance(int ID) {
+		Connection con=DBconnection.getCon();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=con.prepareStatement("select balance from customer where ID=?");
+			stmt.setInt(1,ID);
+			rs=stmt.executeQuery();
+			if(rs.next()) {
+				return rs.getFloat("balance");
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return (float) (0.0);
 	}
 }

@@ -2,6 +2,10 @@ package com.model;
 
 public class Customer {
 	public AccountDetails acc;
+	@Override
+	public String toString() {
+		return "Customer [name=" + name + ", uname=" + uname + ", loginPass=" + loginPass + "]";
+	}
 	private String name;
 	private String uname;
 	private String loginPass;

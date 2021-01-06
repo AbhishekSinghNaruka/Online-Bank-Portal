@@ -8,21 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.Dao.CustomerDao;
 import com.model.Customer;
 
 /**
- * Servlet implementation class regdata
+ * Servlet implementation class Deposit
  */
-@WebServlet("/regdata")
-public class regdata extends HttpServlet {
+@WebServlet("/Deposit")
+public class Deposit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public regdata() {
+    public Deposit() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,15 +42,21 @@ public class regdata extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		CustomerDao customerDoa = new CustomerDao();
-		Customer customer = new Customer();
-		customer.setName(request.getParameter("name"));
-		customer.setUname(request.getParameter("uname"));
-		customer.setLoginPass(request.getParameter("loginPass"));
-		customer.acc.setTransictionPassword(Integer.parseInt(request.getParameter("pin")));
-		customerDoa.addCustomer(customer);
-		 RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-         dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		Customer customer= (Customer) session.getAttribute("customer");
+		float amount=Float.parseFloat(request.getParameter("amount"));
+		CustomerDao customerDao=new CustomerDao();
+		int ID=customer.acc.getId();
+		
+		System.out.println(customer);
+		System.out.println("hello");
+		
+		customerDao.changeBalance((float) (customerDao.getBalance(ID)+amount), ID);
+		String message=amount+" is added from your account";
+		
+		request.setAttribute("message", message);
+		 RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+        dispatcher.forward(request, response);
 	}
 
 }
