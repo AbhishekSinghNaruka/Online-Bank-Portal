@@ -1,0 +1,70 @@
+*{
+	box-sizing:border-box;
+}
+html {
+    /* To make use of full height of page*/
+    min-height: 100%;
+    margin: 0;
+}
+body {
+  height: 100%;
+  margin: 0;
+	background-image: url("login-background.jpg");
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	color:#ff0000;
+}
+a:link{
+	text-decoration:none;
+}
+.box{
+	height:500px;
+	width:350px;
+	border:2px solid green;
+	margin:100px auto;
+	padding:50px;
+	display:flex;
+	flex-direction:column;
+}
+.heading{
+	font-family: 'Heebo', sans-serif;
+	font-weight:bold;
+	font-size:28px;
+	height:50px;
+}
+.feild{
+	margin-top:20px;
+	height:65px;
+	display:flex;
+	flex-direction:column;
+	justify-content:space-evenly;
+	font-family: 'Roboto Slab', serif;
+}
+
+.message{
+	height:50px;
+	font-family: 'Roboto Slab', serif;
+}
+.submitButton{
+	height:50px;
+}
+.link{
+	height:60px;
+	margin-top:40px;
+	text-align:center;
+	font-family: 'Roboto Slab', serif;
+}
+.submitButton > input[type="submit"]{
+	height:30px;
+	width:100%;
+	font-family: 'Comfortaa', cursive;
+	background:none;
+	border:2px solid white;
+	letter-spacing:3px;
+	border-radius:6px;
+	color:white;
+	transition:.6s;
+}
+input[type="submit"]:hover{
+	background-color:#22e33c;
+}
