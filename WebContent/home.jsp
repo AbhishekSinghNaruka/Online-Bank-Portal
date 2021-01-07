@@ -21,6 +21,9 @@
 <div class="balance">
 <button class="Balance" type="button">Check Balance</button>
 </div>
+
+<a href="edit.jsp">Edit your account details</a>
+<br/>
 ${message }
 
 <script>

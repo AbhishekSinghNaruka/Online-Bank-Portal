@@ -116,4 +116,28 @@ public class CustomerDao {
 		}
 		return (float) (0.0);
 	}
+	public void update(Customer customer) {
+		Connection con=null;
+		PreparedStatement stmt=null;
+		try {
+			con=DBconnection.getCon();
+			stmt=con.prepareStatement("update customer set name=?, loginPass=?, userName=? "+"where ID=?");
+			stmt.setString(1,customer.getName());
+			stmt.setString(2,customer.getLoginPass());
+			stmt.setString(3,customer.getUname());
+			stmt.setInt(4,customer.acc.getId());
+			stmt.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+	}
 }
