@@ -25,7 +25,8 @@
 <a href="edit.jsp">Edit your account details</a>
 <br/>
 ${message }
-
+<br/>
+<a href="Logout">Logout</a>
 <script>
 console.log("in script");
 var withdButton=document.getElementById("withdraw");
@@ -61,6 +62,11 @@ depButton.addEventListener("click",function(){
 	
 });
 
+</script>
+<script type="text/javascript" >
+   function preventBack(){window.history.forward();}
+    setTimeout("preventBack()", 0);
+    window.onunload=function(){null};
 </script>
 </body>
 </html>
