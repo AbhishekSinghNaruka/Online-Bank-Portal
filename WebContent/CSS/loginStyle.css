@@ -18,18 +18,19 @@ a:link{
 	text-decoration:none;
 }
 .box{
-	height:500px;
-	width:350px;
+	height:80%;
+	min-width:250px;
+	width:24%;
 	border:2px solid green;
-	margin:100px auto;
-	padding:50px;
+	margin:6% auto;
+	padding:3%;
 	display:flex;
 	flex-direction:column;
 }
 .heading{
 	font-family: 'Heebo', sans-serif;
 	font-weight:bold;
-	font-size:28px;
+	font-size:2em;
 	height:50px;
 }
 .feild{

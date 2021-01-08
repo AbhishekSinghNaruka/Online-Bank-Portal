@@ -52,7 +52,7 @@ public class Deposit extends HttpServlet {
 		System.out.println("hello");
 		
 		customerDao.changeBalance((float) (customerDao.getBalance(ID)+amount), ID);
-		String message=amount+" is added from your account";
+		String message=amount+" is added to your account";
 		
 		request.setAttribute("message", message);
 		 RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
