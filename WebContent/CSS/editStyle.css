@@ -27,7 +27,7 @@ body {
 }
 .feild{
 	margin-top:20px;
-	height:75px;
+	height:65px;
 	display:flex;
 	flex-direction:column;
 	justify-content:space-evenly;
@@ -60,4 +60,13 @@ body {
 }
 input[type="submit"]:hover{
 	background-color:#22e33c;
+}
+.link{
+	margin-top:20px;
+	height:50px;
+}
+a:link{
+	font-size:1.2em;
+	text-decoration:none;
+	font-family: 'Roboto Slab', serif;
 }

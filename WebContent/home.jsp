@@ -38,5 +38,6 @@
 			<div class="message">${message }</div>
 		</div>
 		<script src="JS/homeScript.js"></script>
+		<script src="JS/preventBackward.js"></script>
 	</body>
 </html>

@@ -140,4 +140,25 @@ public class CustomerDao {
 				}
 		}
 	}
+	public void delete(int ID) {
+		Connection con=DBconnection.getCon();
+		PreparedStatement stmt=null;
+		try {
+			con=DBconnection.getCon();
+			stmt=con.prepareStatement("delete from customer where ID=?");
+			stmt.setInt(1,ID);
+			stmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+	}
 }
