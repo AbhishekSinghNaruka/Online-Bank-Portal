@@ -46,18 +46,21 @@ public class Withdraw extends HttpServlet {
 		Customer customer= (Customer) session.getAttribute("customer");
 		float amount=Float.parseFloat(request.getParameter("amount"));
 		CustomerDao customerDao=new CustomerDao();
-		String message;
+		String message=null;
 		int ID=customer.acc.getId();
-		 
-		System.out.println(customer);
-		System.out.println("hi");
-		
-		if(customerDao.getBalance(ID)>=amount) {
-			customerDao.changeBalance((float) (customerDao.getBalance(ID)-amount), ID);
-			message=amount+" is deducted from your account";
+
+		if(customer.acc.getTransictionPassword()==Integer.parseInt(request.getParameter("pin"))) {
+			if(customerDao.getBalance(ID)>=amount) {
+				customerDao.changeBalance((float) (customerDao.getBalance(ID)-amount), ID);
+				message=amount+" is deducted from your account";
+			}
+			else
+				message="Insuffecient Balance";
 		}
 		else
-			message="Insuffecient Balance";
+			message="wrong transiction pin";
+		
+		
 		request.setAttribute("message", message);
 		 RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
          dispatcher.forward(request, response);

@@ -42,26 +42,44 @@ public class Edit extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
+		CustomerDao customerDao=new CustomerDao();
+		boolean changeUname=false;
 		HttpSession session = request.getSession();
 		Customer customer= (Customer) session.getAttribute("customer");
-		System.out.println(customer);
-		System.out.println("in edit servlet");
 		
-		System.out.println("before: "+customer);
+		if(customer.getUname().equals(request.getParameter("uname")) || customerDao.getID(request.getParameter("uname"))==customer.acc.getId() )
+			changeUname=false;
+		else
+			changeUname=true;
 		customer.setName(request.getParameter("name"));
 		customer.setUname(request.getParameter("uname"));
 		customer.setLoginPass(request.getParameter("pass"));
-		System.out.println("after: "+customer);
 		
 		session.removeAttribute("customer");
 		session.setAttribute("customer", customer);
 		
-		CustomerDao customerDao=new CustomerDao();
-		customerDao.update(customer);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-        dispatcher.forward(request, response);
+		if(changeUname) {
+			if(customerDao.checkUniqueUserName(customer.getUname())) {
+				
+				customerDao.update(customer);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+		        dispatcher.forward(request, response);
+			}
+			else {
+				String message="this user name already exist";
+				request.setAttribute("message", message);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("edit.jsp");
+		         dispatcher.forward(request, response);
+			}
+		}
+		else {
+			customerDao.update(customer);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+	        dispatcher.forward(request, response);
+		}
+		
+		
 	}
 
 }

@@ -13,10 +13,10 @@
 	</head>
 	<body>
 		<div class="box">
-			<form action="./logdata" method="post">
+			<form name="login" action="./logdata" onsubmit="return loginValidateForm()" method="post">
 				<div class="heading">Login</div>
 				<div class="feild">
-					<div class="feildDiscription">Enter User Name</div>
+					<div class="feildDiscription">Enter emailID</div>
 					<div class="feildInput"><input type="text" name="userName"></div>
 				</div>
 				<div class="feild">
@@ -28,5 +28,6 @@
 			</form>
 			<div class="link">Don't have an account?<br/><a href="register.jsp">Sign Up here</a></div>
 		</div>
+	<script src="JS/loginValidation.js"></script>
 	</body>
 </html>	

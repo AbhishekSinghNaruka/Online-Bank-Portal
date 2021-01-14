@@ -15,7 +15,7 @@ withdButton.addEventListener("click", function (){
 		addInput2.removeChild(document.querySelector(".added"));
 		console.log("in if widthButton event");
 	}
-		addInput1.innerHTML=`<div class="added"><input type="text" name="amount"><input type="submit" value="submit"></div>`;
+		addInput1.innerHTML=`<div class="added">Pin<input type="password" name="pin">Amount<input type="text" name="amount"><input type="submit" value="submit"></div>`;
 		isFeildAdded=true;
 	
 });
@@ -26,7 +26,7 @@ depButton.addEventListener("click",function(){
 		addInput1.removeChild(document.querySelector(".added"));
 		console.log("in if widthButton event");
 	}
-		addInput2.innerHTML=`<div class="added"><input type="text" name="amount"><input type="submit" value="submit"></div>`;
+		addInput2.innerHTML=`<div class="added">Pin<input type="password" name="pin">Amount<input type="text" name="amount"><input type="submit" value="submit"></div>`;
 		console.log("in else widthButton event");
 		isFeildAdded=true;
 	

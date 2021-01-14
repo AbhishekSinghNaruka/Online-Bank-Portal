@@ -30,7 +30,7 @@
 					<div class="feildInput"><input type="text" name="pass" value="<%= customer.getLoginPass() %>"/></div>
 				</div>
 				<div class="link"><a href="Delete">Delete your account</a></div>
-				<div class="message"></div>
+				<div class="message">${message }</div>
 				<div class="submitButton"><input type="submit" value="save changes"/></div>
 			</form>
 		</div>

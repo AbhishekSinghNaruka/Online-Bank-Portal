@@ -12,14 +12,12 @@ public class CustomerDao {
 		Connection con=DBconnection.getCon();
 		PreparedStatement stmt=null;
 		try {
-			System.out.println("inserting records");
 			stmt=con.prepareStatement("insert into customer (name,userName,loginPass,pin) values(?,?,?,?)");
 			stmt.setString(1, customer.getName());
 			stmt.setString(2,customer.getUname());
 			stmt.setString(3, customer.getLoginPass());
 			stmt.setInt(4, customer.acc.getTransictionPassword());
 			stmt.executeUpdate();
-			System.out.println("inserted records");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -160,5 +158,57 @@ public class CustomerDao {
 					e.printStackTrace();
 				}
 		}
+	}
+	public boolean checkUniqueUserName(String userName) {
+		Connection con =null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			con=DBconnection.getCon();
+			stmt=con.prepareStatement("select ID from customer where userName=?");
+			stmt.setString(1, userName);
+			rs=stmt.executeQuery();
+			if(rs.next())
+				return false;
+			else
+				return true;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return false;
+	}
+	public int getID(String userName) {
+		Connection con =null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			con=DBconnection.getCon();
+			stmt=con.prepareStatement("select ID from customer where userName=?");
+			stmt.setString(1, userName);
+			rs=stmt.executeQuery();
+			if(rs.next())
+				return rs.getInt("ID");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return 0;
 	}
 }

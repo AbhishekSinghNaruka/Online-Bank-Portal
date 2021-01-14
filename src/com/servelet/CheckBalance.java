@@ -14,16 +14,16 @@ import com.Dao.CustomerDao;
 import com.model.Customer;
 
 /**
- * Servlet implementation class Deposit
+ * Servlet implementation class CheckBalance
  */
-@WebServlet("/Deposit")
-public class Deposit extends HttpServlet {
+@WebServlet("/CheckBalance")
+public class CheckBalance extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Deposit() {
+    public CheckBalance() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +34,15 @@ public class Deposit extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		HttpSession session = request.getSession();
+		Customer customer= (Customer) session.getAttribute("customer");
+		CustomerDao customerDao=new CustomerDao();
+		
+		String message ="Your current balance is "+customerDao.getBalance(customer.acc.getId());
+		request.setAttribute("message", message);
+		 RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+        dispatcher.forward(request, response);
 	}
 
 	/**
@@ -42,24 +51,6 @@ public class Deposit extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		HttpSession session = request.getSession();
-		Customer customer= (Customer) session.getAttribute("customer");
-		float amount=Float.parseFloat(request.getParameter("amount"));
-		CustomerDao customerDao=new CustomerDao();
-		int ID=customer.acc.getId();
-		String message=null;
-
-		if(customer.acc.getTransictionPassword()==Integer.parseInt(request.getParameter("pin"))) {
-			customerDao.changeBalance((float) (customerDao.getBalance(ID)+amount), ID);
-			 message=amount+" is added to your account";
-		}
-		else
-			message="wrong transiction pin";
-		
-		
-		request.setAttribute("message", message);
-		 RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-        dispatcher.forward(request, response);
 	}
 
 }

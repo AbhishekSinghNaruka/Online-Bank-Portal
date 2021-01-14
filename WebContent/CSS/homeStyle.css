@@ -33,6 +33,8 @@ body{
 }
 .added{
 	margin-top:5px;
+	display:flex;
+	
 }
 .btn{
 	height:30px;

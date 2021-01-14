@@ -41,15 +41,26 @@ public class regdata extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		CustomerDao customerDoa = new CustomerDao();
+
+		CustomerDao customerDao = new CustomerDao();
 		Customer customer = new Customer();
 		customer.setName(request.getParameter("name"));
 		customer.setUname(request.getParameter("uname"));
 		customer.setLoginPass(request.getParameter("loginPass"));
 		customer.acc.setTransictionPassword(Integer.parseInt(request.getParameter("pin")));
-		customerDoa.addCustomer(customer);
-		 RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-         dispatcher.forward(request, response);
+		
+		if(customerDao.checkUniqueUserName(customer.getUname())){
+			customerDao.addCustomer(customer);
+			 RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+	         dispatcher.forward(request, response);
+		}
+		else {
+			String message="this user name already exist";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+	         dispatcher.forward(request, response);
+		}
+		
 	}
 
 }

@@ -36,11 +36,15 @@ a:link{
 	height:50px;
 }
 .feild{
-	margin-top:20px;
-	height:65px;
+	margin-top:15px;
+	height:60px;
 	display:flex;
 	flex-direction:column;
 	justify-content:space-evenly;
+	font-family: 'Roboto Slab', serif;
+}
+.message{
+	height:50px;
 	font-family: 'Roboto Slab', serif;
 }
 .submitButton{

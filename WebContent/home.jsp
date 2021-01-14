@@ -14,21 +14,21 @@
 		<div class="content">
 			<div class="heading">Welcome to home page</div>
 			<div class="option">
-				<form action="./Withdraw" method="post">
+				<form name="withdraw" action="./Withdraw" onsubmit="return withdrawValidateForm()" method="post">
 					<button id="withdraw" class="btn" type="button">withdraw</button>
 					<div class="addInputFeild1"></div>
 				</form>
 			</div>
 			
 			<div class="option">
-				<form action="./Deposit" method="post">
+				<form name="deposit" action="./Deposit" onsubmit="return depositValidateForm()" method="post">
 					<button id="deposit" class="btn" type="button">Deposit</button>
 					<div class="addInputFeild2"></div>
 				</form>
 			</div>
 			
 			<div class="option">
-				<button class="btn" type="button">Check Balance</button>
+				<a href="CheckBalance"><button class="btn" type="button">Check Balance</button></a>
 			</div>
 		
 			<div class="option"><a href="edit.jsp"><button class="btn">Edit your account details</button></a></div>
@@ -39,5 +39,6 @@
 		</div>
 		<script src="JS/homeScript.js"></script>
 		<script src="JS/preventBackward.js"></script>
+		<script src="JS/homeValidation.js"></script>
 	</body>
 </html>
